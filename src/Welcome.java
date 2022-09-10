@@ -33,9 +33,9 @@ public class Welcome extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         email = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        pass = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        pass = new javax.swing.JPasswordField();
         jLabel5 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
 
@@ -75,12 +75,11 @@ public class Welcome extends javax.swing.JFrame {
                         .addComponent(jLabel2))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(22, 22, 22)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel4)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel3)
-                                .addComponent(email)
-                                .addComponent(pass, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))))
+                            .addComponent(jLabel3)
+                            .addComponent(email, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                            .addComponent(pass)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(74, 74, 74)
                         .addComponent(jButton1)))
@@ -97,9 +96,9 @@ public class Welcome extends javax.swing.JFrame {
                 .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(22, 22, 22)
                 .addComponent(jButton1)
                 .addContainerGap(27, Short.MAX_VALUE))
         );
@@ -167,13 +166,16 @@ public class Welcome extends javax.swing.JFrame {
         Connection conn=null;
         Statement st=null;
         ResultSet rs=null;
-        
+        char[] c=pass.getPassword();
+        String pas="";
+        for(int i=0;i<c.length;i++)
+            pas+=c[i];
         try{
             conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/library","ubaid","root");
             st=conn.createStatement();
             rs=st.executeQuery("select * from user_data");
             while(rs.next()){
-                if(email.getText().equals(rs.getString(1))&&pass.getText().equals(rs.getString(6))){
+                if(email.getText().equals(rs.getString(1))&&pas.equals(rs.getString(6))){
                     flag=true;
                     new Home(rs.getString(2)).setVisible(true);
                     dispose();
@@ -249,6 +251,6 @@ public class Welcome extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField pass;
+    private javax.swing.JPasswordField pass;
     // End of variables declaration//GEN-END:variables
 }

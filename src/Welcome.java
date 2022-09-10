@@ -8,6 +8,7 @@
  * @author ubaid
  */
 import java.sql.*;
+import javax.swing.JOptionPane;
 public class Welcome extends javax.swing.JFrame {
 
     /**
@@ -106,6 +107,11 @@ public class Welcome extends javax.swing.JFrame {
         jLabel5.setText("Don't have membership ?");
 
         jButton2.setText("Apply");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -157,24 +163,45 @@ public class Welcome extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        boolean flag=false;
         Connection conn=null;
         Statement st=null;
         ResultSet rs=null;
+        
         try{
-            conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/library","root","root");
+            conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/library","ubaid","root");
             st=conn.createStatement();
-            rs=st.executeQuery("select * from logindetails");
+            rs=st.executeQuery("select * from user_data");
             while(rs.next()){
-                if(email.getText().equals(rs.getString(1))&&pass.getText().equals(rs.getString(2))){
-                    
+                if(email.getText().equals(rs.getString(1))&&pass.getText().equals(rs.getString(6))){
+                    flag=true;
+                    new Home(rs.getString(2)).setVisible(true);
+                    dispose();
                 }
             }
         }
         catch(Exception e){
-            
+            JOptionPane.showMessageDialog(rootPane, e.getMessage());
         }
+        finally{
+             try{
+                 rs.close();
+                    st.close();
+                    conn.close();
+             }
+             catch(Exception e){
+                 
+             }
+        }
+        if(!flag)
+        JOptionPane.showMessageDialog(rootPane, "Login Failed either you are not registered or you entered wrong details");
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        new Resgistration().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

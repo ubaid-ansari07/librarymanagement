@@ -8,6 +8,7 @@
  * @author ubaid
  */
 import java.sql.*;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 class PasswordException extends Exception{}
 class ContactException extends Exception{}
@@ -45,13 +46,16 @@ public class Resgistration extends javax.swing.JFrame {
         city = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         password = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        reg = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(215, 196, 158));
 
-        jLabel1.setText("RESGISTER YOUR DETAILS HERE");
+        jLabel1.setText("PLEASE FILL YOUR DETAILS CAREFULLY");
+
+        jPanel2.setBackground(new java.awt.Color(255, 231, 122));
 
         jLabel2.setText("Email Address");
 
@@ -65,10 +69,18 @@ public class Resgistration extends javax.swing.JFrame {
 
         jLabel7.setText("Enter your password");
 
-        jButton1.setText("Register");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        reg.setText("Register");
+        reg.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                regMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                regMouseExited(evt);
+            }
+        });
+        reg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                regActionPerformed(evt);
             }
         });
 
@@ -99,7 +111,7 @@ public class Resgistration extends javax.swing.JFrame {
                             .addComponent(password)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(106, 106, 106)
-                        .addComponent(jButton1)))
+                        .addComponent(reg)))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -130,33 +142,43 @@ public class Resgistration extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(reg)
                 .addContainerGap(31, Short.MAX_VALUE))
         );
+
+        jLabel8.setBackground(new java.awt.Color(255, 231, 122));
+        jLabel8.setFont(new java.awt.Font("Liberation Sans Narrow", 0, 36)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("REGISTER YOURSELF HERE");
+        jLabel8.setOpaque(true);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(jLabel1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(45, 45, 45)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(295, 689, Short.MAX_VALUE))))
+                        .addGap(72, 72, 72)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 840, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(62, 62, 62)
+                        .addComponent(jLabel1)))
+                .addContainerGap(151, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(24, 24, 24)
+                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                .addGap(24, 24, 24)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(154, Short.MAX_VALUE))
+                .addGap(67, 67, 67))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -184,11 +206,10 @@ public class Resgistration extends javax.swing.JFrame {
         }
         return c.equals(s);
     }
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void regActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regActionPerformed
         
         Connection conn=null;
         PreparedStatement ps=null;
-        PreparedStatement ps2=null;
 
         try{
         String em=email.getText();
@@ -217,18 +238,17 @@ public class Resgistration extends javax.swing.JFrame {
         }
           conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/library","ubaid","root");
           ps=conn.prepareStatement("insert into user_data values(?,?,?,?,?,?)");
-          ps2=conn.prepareStatement("insert into logindetails values(?,?)");
+          
           ps.setString(1, em);
-          ps2.setString(1, em);
+          
           ps.setString(2, na);
           ps.setInt(3, ag);
           ps.setString(4, con);
           ps.setString(5, ci);
           ps.setString(6, pass);
-          ps2.setString(2, pass);
           
           ps.executeUpdate();
-          ps2.executeUpdate();
+       
           
           JOptionPane.showMessageDialog(rootPane, "Registration successful");
         }
@@ -254,14 +274,23 @@ public class Resgistration extends javax.swing.JFrame {
         finally{
             try{
             ps.close();
-            ps2.close();
-            conn.close();
+         conn.close();
             }
             catch(Exception e){
                 
             }
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_regActionPerformed
+
+    private void regMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_regMouseEntered
+
+        reg.setBackground(Color.black);
+    }//GEN-LAST:event_regMouseEntered
+
+    private void regMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_regMouseExited
+
+        reg.setBackground(Color.white);
+    }//GEN-LAST:event_regMouseExited
 
     /**
      * @param args the command line arguments
@@ -303,7 +332,6 @@ public class Resgistration extends javax.swing.JFrame {
     private javax.swing.JTextField city;
     private javax.swing.JTextField contact;
     private javax.swing.JTextField email;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -311,9 +339,11 @@ public class Resgistration extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField name;
     private javax.swing.JPasswordField password;
+    private javax.swing.JButton reg;
     // End of variables declaration//GEN-END:variables
 }

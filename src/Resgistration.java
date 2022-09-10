@@ -48,6 +48,7 @@ public class Resgistration extends javax.swing.JFrame {
         password = new javax.swing.JPasswordField();
         reg = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -152,6 +153,13 @@ public class Resgistration extends javax.swing.JFrame {
         jLabel8.setText("REGISTER YOURSELF HERE");
         jLabel8.setOpaque(true);
 
+        jButton1.setText("<- Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -166,13 +174,15 @@ public class Resgistration extends javax.swing.JFrame {
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 840, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(62, 62, 62)
-                        .addComponent(jLabel1)))
+                        .addComponent(jLabel1))
+                    .addComponent(jButton1))
                 .addContainerGap(151, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
                 .addGap(24, 24, 24)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -251,6 +261,8 @@ public class Resgistration extends javax.swing.JFrame {
        
           
           JOptionPane.showMessageDialog(rootPane, "Registration successful");
+          new Home(na).setVisible(true);
+          dispose();
         }
         catch(EmailException e){
             JOptionPane.showMessageDialog(rootPane, "Incorrect Email");
@@ -280,6 +292,7 @@ public class Resgistration extends javax.swing.JFrame {
                 
             }
         }
+        
     }//GEN-LAST:event_regActionPerformed
 
     private void regMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_regMouseEntered
@@ -291,6 +304,12 @@ public class Resgistration extends javax.swing.JFrame {
 
         reg.setBackground(Color.white);
     }//GEN-LAST:event_regMouseExited
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        new Welcome().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -332,6 +351,7 @@ public class Resgistration extends javax.swing.JFrame {
     private javax.swing.JTextField city;
     private javax.swing.JTextField contact;
     private javax.swing.JTextField email;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

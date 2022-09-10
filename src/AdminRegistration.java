@@ -7,6 +7,12 @@
  *
  * @author ubaid
  */
+import java.sql.*;
+import javax.swing.JOptionPane;
+class PasswordException extends Exception{}
+class ContactException extends Exception{}
+class EmailException extends Exception{}
+class UserNameException extends Exception{}
 public class AdminRegistration extends javax.swing.JFrame {
 
     /**
@@ -36,6 +42,11 @@ public class AdminRegistration extends javax.swing.JFrame {
         name = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         age = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        contact = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        pass = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,21 +65,41 @@ public class AdminRegistration extends javax.swing.JFrame {
 
         jLabel5.setText("Age");
 
+        jLabel6.setText("Contact Number");
+
+        jLabel7.setText("Enter a password");
+
+        jButton1.setText("Register");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(email)
-                    .addComponent(username)
-                    .addComponent(name)
-                    .addComponent(age, javax.swing.GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(213, 213, 213)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(email)
+                            .addComponent(username)
+                            .addComponent(name)
+                            .addComponent(age)
+                            .addComponent(contact)
+                            .addComponent(pass, javax.swing.GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE))))
                 .addContainerGap(62, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -90,7 +121,17 @@ public class AdminRegistration extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
                 .addComponent(age, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(200, Short.MAX_VALUE))
+                .addGap(42, 42, 42)
+                .addComponent(jLabel6)
+                .addGap(18, 18, 18)
+                .addComponent(contact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(jLabel7)
+                .addGap(18, 18, 18)
+                .addComponent(pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -98,22 +139,23 @@ public class AdminRegistration extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(134, 134, 134)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(134, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(174, 174, 174))
+                .addContainerGap(136, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(132, 132, 132))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(172, 172, 172))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
+                .addGap(15, 15, 15)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -131,6 +173,116 @@ public class AdminRegistration extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    public boolean checkEmail(String email){
+        String s="moc.liamg@";
+        String c="";
+        for(int i=0;i<10;i++){
+            c+=email.charAt(email.length()-(i+1));
+        }
+        return c.equals(s);
+    }
+    public boolean checkUserName(String username){
+        Connection conn=null;
+        Statement st=null;
+        ResultSet rs=null;
+        try{
+            conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/library","ubaid","root");
+            st=conn.createStatement();
+            rs=st.executeQuery("select username from admin_data");
+            while(rs.next()){
+                if(rs.getString(1).equals(username))
+                    return false;
+            }
+        }
+        catch(Exception e){
+            
+        }
+        finally{
+            try{
+                rs.close();
+                st.close();
+                conn.close();
+            }
+            catch(Exception e){
+                
+            }
+        }
+        return true;
+    }
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Connection conn=null;
+        PreparedStatement ps=null;
+        try{    
+            String em=email.getText();
+            if(em.length()<11)
+            throw new EmailException();
+        if(!this.checkEmail(em))
+            throw new EmailException();
+            String usern=username.getText();
+            if(!this.checkUserName(usern))
+                throw new UserNameException();
+            String na=name.getText();
+            int ag=Integer.parseInt(age.getText());
+            if(ag<0||ag>110)
+            throw new NumberFormatException();
+            String con=contact.getText();
+            if(con.length()!=10)
+            throw new ContactException();
+        for(int i=0;i<10;i++){
+            if(con.charAt(i)<'0'||con.charAt(i)>'9')
+                throw new ContactException();
+        }
+            char[] c=pass.getPassword();
+            if(c.length!=8)
+            throw new PasswordException();
+            String pas="";
+            for(int i=0;i<c.length;i++)
+                pas+=c[i];
+            
+            conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/library","ubaid","root");
+            ps=conn.prepareStatement("insert into admin_data values(?,?,?,?,?,?)");
+            
+            ps.setString(1, em);
+            ps.setString(2, usern);
+            ps.setString(3, na);
+            ps.setInt(4, ag);
+            ps.setString(5, con);
+            ps.setString(6, pas);
+            
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(rootPane, "Registration Successfull");
+        }
+        catch(EmailException e){
+            JOptionPane.showMessageDialog(rootPane, "Incorrect Email");
+        }
+        catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(rootPane, "Please Enter Correct Age");
+        }
+         catch(ContactException e){
+            JOptionPane.showMessageDialog(rootPane, "Please Insert correct Contact number");
+        }
+        catch(PasswordException e){
+            JOptionPane.showMessageDialog(rootPane, "Password must be of 8 characters");
+        }
+        catch(SQLIntegrityConstraintViolationException e){
+            JOptionPane.showMessageDialog(rootPane, "Email Already exist");
+        }
+        catch(UserNameException e){
+            JOptionPane.showMessageDialog(rootPane, "Username Already exist");
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(rootPane, e.getMessage());
+        }
+      finally{
+            try{
+                ps.close();
+                conn.close();
+            }
+            catch(Exception e){
+                
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -169,15 +321,20 @@ public class AdminRegistration extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField age;
+    private javax.swing.JTextField contact;
     private javax.swing.JTextField email;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField name;
+    private javax.swing.JPasswordField pass;
     private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
 }

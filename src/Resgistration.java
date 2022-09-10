@@ -9,6 +9,9 @@
  */
 import java.sql.*;
 import javax.swing.JOptionPane;
+class PasswordException extends Exception{}
+class ContactException extends Exception{}
+class EmailException extends Exception{}
 public class Resgistration extends javax.swing.JFrame {
 
     /**
@@ -174,47 +177,40 @@ public class Resgistration extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     public boolean checkEmail(String email){
-        Connection conn=null;
-        Statement st=null;
-        ResultSet rs=null;
-        try{
-        conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/library","ubaid","root");
-        st=conn.createStatement();
-        rs=st.executeQuery("select * from user_data");
-        while(rs.next()){
-            if(email.equals(rs.getString(1)))
-                return false;
+        String s="moc.liamg@";
+        String c="";
+        for(int i=0;i<10;i++){
+            c+=email.charAt(email.length()-(i+1));
         }
-        }
-        catch(Exception e){
-            
-        }
-        finally{
-            try{
-            rs.close();
-            st.close();
-            conn.close();
-            }
-            catch(Exception e){
-                
-            }
-        }
-        return true;
+        return c.equals(s);
     }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
         Connection conn=null;
         PreparedStatement ps=null;
         PreparedStatement ps2=null;
-        int a=1;
-        while(a>0){
+
         try{
         String em=email.getText();
+        if(em.length()<11)
+            throw new EmailException();
+        if(!this.checkEmail(em))
+            throw new EmailException();
         String na=name.getText();
         int ag=Integer.parseInt(age.getText());
+        if(ag<0||ag>110)
+            throw new NumberFormatException();
         String con=contact.getText();
+        if(con.length()!=10)
+            throw new ContactException();
+        for(int i=0;i<10;i++){
+            if(con.charAt(i)<'0'||con.charAt(i)>'9')
+                throw new ContactException();
+        }
         String ci=city.getText();
         char[] p=password.getPassword();
+        if(p.length!=8)
+            throw new PasswordException();
         String pass="";
         for(int i=0;i<p.length;i++){
             pass+=p[i];
@@ -235,19 +231,25 @@ public class Resgistration extends javax.swing.JFrame {
           ps2.executeUpdate();
           
           JOptionPane.showMessageDialog(rootPane, "Registration successful");
-          a=0;
+        }
+        catch(EmailException e){
+            JOptionPane.showMessageDialog(rootPane, "Incorrect Email");
+        }
+        catch(ContactException e){
+            JOptionPane.showMessageDialog(rootPane, "Please Insert correct Contact number");
+        }
+        catch(PasswordException e){
+            JOptionPane.showMessageDialog(rootPane, "Password must be of 8 characters");
         }
         catch(SQLIntegrityConstraintViolationException e){
             JOptionPane.showMessageDialog(rootPane, "Email Already exist");
-            a=0;
         }
         catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(rootPane, "Incorrect input for age or contact");
-            a=0;
+            JOptionPane.showMessageDialog(rootPane, "Please Enter Correct Age");
         }
        catch(Exception e){
             JOptionPane.showMessageDialog(rootPane, e.getMessage());
-            a=0;
+           
        }
         finally{
             try{
@@ -258,7 +260,6 @@ public class Resgistration extends javax.swing.JFrame {
             catch(Exception e){
                 
             }
-        }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

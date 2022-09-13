@@ -7,6 +7,8 @@
  *
  * @author ubaid
  */
+import java.sql.*;
+import javax.swing.JOptionPane;
 public class Admin extends javax.swing.JFrame {
 
     /**
@@ -53,6 +55,11 @@ public class Admin extends javax.swing.JFrame {
         });
 
         jButton1.setText("LOGIN");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -93,6 +100,11 @@ public class Admin extends javax.swing.JFrame {
         jLabel4.setText("New Admin Registration");
 
         jButton2.setText("Click to sign up");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -140,8 +152,49 @@ public class Admin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passActionPerformed
-        // TODO add your handling code here:
+      
     }//GEN-LAST:event_passActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        boolean flag=false;
+        Connection conn=null;
+        Statement st=null;
+        ResultSet rs=null;
+        char[] c=pass.getPassword();
+        String pas=new String(c);
+                try{
+            conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/library","ubaid","root");
+            st=conn.createStatement();
+            rs=st.executeQuery("select * from admin_data");
+            while(rs.next()){
+                if(username.getText().equals(rs.getString("username"))&&pas.equals(rs.getString("password"))){
+                    flag=true;
+                    new AdminHome().setVisible(true);
+                    dispose();
+                }
+            }
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(rootPane, e.getMessage());
+        }
+        finally{
+             try{
+                 rs.close();
+                    st.close();
+                    conn.close();
+             }
+             catch(Exception e){
+                 
+             }
+        }
+        if(!flag)
+        JOptionPane.showMessageDialog(rootPane, "Login Failed either you are not registered or you entered wrong details");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+      new AdminRegistration().setVisible(true);
+      dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

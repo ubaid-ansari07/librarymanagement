@@ -7,6 +7,8 @@
  *
  * @author ubaid
  */
+import java.sql.*;
+import javax.swing.JOptionPane;
 public class BookIssue extends javax.swing.JFrame {
 
     /**
@@ -14,6 +16,12 @@ public class BookIssue extends javax.swing.JFrame {
      */
     public BookIssue() {
         initComponents();
+        mess.setVisible(false);
+        bookidlabel.setVisible(false);
+        bookid.setVisible(false);
+        jButton3.setVisible(false);
+        bookmess.setVisible(false);
+        jButton4.setVisible(false);
     }
 
     /**
@@ -25,50 +33,233 @@ public class BookIssue extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        email = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        mess = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        bookidlabel = new javax.swing.JLabel();
+        bookid = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
+        bookmess = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
+        p = new javax.swing.JPasswordField();
+        mess1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Book issue");
+        jPanel1.setBackground(new java.awt.Color(215, 196, 158));
 
-        jButton1.setText("<- Back");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jLabel1.setText("Enter Email");
+
+        jLabel2.setText("Password");
+
+        jLabel3.setBackground(new java.awt.Color(255, 231, 122));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Enter User's Details");
+        jLabel3.setOpaque(true);
+
+        jButton1.setText("<-Back");
+
+        mess.setBackground(new java.awt.Color(255, 231, 122));
+        mess.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        mess.setOpaque(true);
+
+        jButton2.setText("Search");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
+
+        bookidlabel.setText("Enter Book Id");
+
+        jButton3.setText("Search for book");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        bookmess.setBackground(new java.awt.Color(255, 231, 122));
+        bookmess.setOpaque(true);
+
+        jButton4.setText("Issue this Book");
+
+        mess1.setBackground(new java.awt.Color(255, 231, 122));
+        mess1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        mess1.setText("Name           Age             Contact              City            ");
+        mess1.setOpaque(true);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(114, 114, 114)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(168, 168, 168)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(294, 294, 294)
+                        .addComponent(jButton2))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(mess, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(bookmess, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(bookidlabel)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(bookid, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton3))
+                            .addComponent(jButton4)
+                            .addComponent(mess1, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(p, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addGap(176, 176, 176)
+                            .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(498, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(p, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(mess1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(mess, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(117, 117, 117)
+                .addComponent(bookidlabel)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bookid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3))
+                .addGap(18, 18, 18)
+                .addComponent(bookmess, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton4)
+                .addContainerGap(85, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(157, 157, 157)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton1)))
-                .addContainerGap(171, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jButton1)
-                .addGap(98, 98, 98)
-                .addComponent(jLabel1)
-                .addContainerGap(160, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new Home().setVisible(true);        // TODO add your handling code here:
-dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Connection conn=null;
+        ResultSet rs=null;
+        PreparedStatement ps=null;
+        boolean f=false;
+        try{
+            conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/library","ubaid","root");
+            ps=conn.prepareStatement("select * from user_data");
+            rs=ps.executeQuery();
+            char[] c=p.getPassword();
+            String pass=new String(c);
+            String name="";
+            String contact="";
+            while(rs.next()){
+                if(rs.getString("email").equals(email.getText())&&rs.getString("password").equals(pass)){
+                    f=true;
+                    mess.setText(rs.getString("name")+"         "+rs.getString("age")+"         "+rs.getString("contact")+"         "+rs.getString("city"));
+                    name=rs.getString("name");
+                    contact=rs.getString("contact");
+                    mess.setVisible(true);
+                    bookidlabel.setVisible(true);
+                    bookid.setVisible(true);
+                    jButton3.setVisible(true);
+                }
+            }
+            if(!f)
+                JOptionPane.showMessageDialog(rootPane, "No record Found");
+        }
+        catch(Exception e){
+            
+        }
+        finally{
+            try{
+                rs.close();
+                ps.close();
+                conn.close();
+            }
+            catch(Exception e){
+                
+            }
+        }
+       
+           
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        Connection conn=null;
+        ResultSet rs=null;
+        PreparedStatement ps=null;
+        boolean f=false;
+        try{
+            conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/library","ubaid","root");
+            ps=conn.prepareStatement("select * from books where bookid=?");
+            ps.setString(1, bookid.getText());
+            rs=ps.executeQuery();
+            while(rs.next()){
+                f=true;
+            bookmess.setText("Book Id:- "+rs.getString("bookid")+"  Book Name:- "+rs.getString("bookname")+" Author Name:- "+rs.getString("authorname")+" Price:- "+rs.getInt("price"));
+            }
+            if(!f)
+                JOptionPane.showMessageDialog(rootPane, "No Book Found");
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(rootPane, e.getMessage());
+        }
+        finally{
+            try{
+                rs.close();
+                ps.close();
+                conn.close();
+            }
+            catch(Exception e){
+                
+            }
+        }                      
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -106,7 +297,20 @@ dispose();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField bookid;
+    private javax.swing.JLabel bookidlabel;
+    private javax.swing.JLabel bookmess;
+    private javax.swing.JTextField email;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel mess;
+    private javax.swing.JLabel mess1;
+    private javax.swing.JPasswordField p;
     // End of variables declaration//GEN-END:variables
 }
